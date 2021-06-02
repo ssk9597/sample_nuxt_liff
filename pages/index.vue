@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api';
-import liff from '@line/liff';
 
 declare global {
   interface Window {
@@ -23,7 +22,7 @@ export default defineComponent({
 
     onMounted(async () => {
       await window.liff.init({
-        liffId: '1656056842-2mQbxB5R',
+        liffId: process.env.LIFF_ID,
       });
     });
 
