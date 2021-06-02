@@ -27,13 +27,18 @@ export default defineComponent({
             type: 'text',
             text: name.value,
           },
+          {
+            type: 'text',
+            text: '送信が完了しました',
+          },
         ])
         .then(() => {
           liff.closeWindow();
         })
         .catch(() => {
-          alert('error');
+          window.alert('Error sending message');
         });
+
       name.value = '';
     };
 
