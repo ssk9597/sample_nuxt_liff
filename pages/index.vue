@@ -7,21 +7,27 @@
 </template>
 
 <script lang="ts">
-import liff from '@line/liff';
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api';
+
+declare global {
+  interface Window {
+    liff: any;
+  }
+}
+window.liff = window.liff || {};
 
 export default defineComponent({
   setup() {
     const name = ref<string>('');
 
     onMounted(async () => {
-      await liff.init({
+      await window.liff.init({
         liffId: '1656056842-2mQbxB5R',
       });
     });
 
     const addName = (): void => {
-      liff
+      window.liff
         .sendMessages([
           {
             type: 'text',
@@ -29,7 +35,7 @@ export default defineComponent({
           },
         ])
         .then(() => {
-          liff.closeWindow();
+          window.liff.closeWindow();
         })
         .catch(() => {
           window.alert('Error sending message');
