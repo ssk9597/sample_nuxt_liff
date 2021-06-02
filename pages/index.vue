@@ -37,8 +37,8 @@ export default defineComponent({
         .then(() => {
           window.liff.closeWindow();
         })
-        .catch(() => {
-          window.alert('Error sending message');
+        .catch((err: string) => {
+          window.alert(err);
           window.liff.closeWindow();
         });
 
