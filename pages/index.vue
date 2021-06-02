@@ -28,6 +28,7 @@ export default defineComponent({
     });
 
     const addName = (): void => {
+      alert(process.env.LIFF_ID);
       window.liff
         .sendMessages([
           {
