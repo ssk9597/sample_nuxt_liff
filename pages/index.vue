@@ -23,7 +23,7 @@ export default defineComponent({
 
     onMounted(async () => {
       await window.liff.init({
-        liffId: process.env.LIFF_ID,
+        liffId: '1656056842-2mQbxB5R',
       });
     });
 
