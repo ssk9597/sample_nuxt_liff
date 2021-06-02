@@ -15,7 +15,6 @@ export default defineComponent({
     const name = ref<string>('');
 
     onMounted(() => {
-      type liffId = string | undefined;
       liff.init({
         liffId: '1656056842-2mQbxB5R',
       });
