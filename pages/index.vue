@@ -21,12 +21,19 @@ export default defineComponent({
     });
 
     const addName = (): void => {
-      liff.sendMessages([
-        {
-          type: 'text',
-          text: name.value,
-        },
-      ]);
+      liff
+        .sendMessages([
+          {
+            type: 'text',
+            text: name.value,
+          },
+        ])
+        .then(() => {
+          liff.closeWindow();
+        })
+        .catch(() => {
+          alert('error');
+        });
       name.value = '';
     };
 
