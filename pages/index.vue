@@ -1,73 +1,40 @@
 <template>
-  <section class="container">
-    <p class="line-id">LINE ID：{{ lineId }}</p>
-    <div class="form">
-      <div class="control">
-        <input class="input" type="text" placeholder="お名前" v-model="formData.name" />
-      </div>
-      <button class="button is-info is-fullwidth" @click="onSubmit()">送信する</button>
-      <button class="button is-light is-fullwidth" @click="handleCancel()">キャンセル</button>
-    </div>
-  </section>
+  <div>
+    <input type="text" v-model="name" />
+    <br />
+    <button @click="addName">送信する</button>
+  </div>
 </template>
 
-<script>
+<script lang="ts">
 import liff from '@line/liff';
+import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api';
 
-export default {
-  data() {
+export default defineComponent({
+  setup() {
+    const name = ref<string>('');
+
+    onMounted(() => {
+      type liffId = string | undefined;
+      liff.init({
+        liffId: '1656056842-2mQbxB5R',
+      });
+    });
+
+    const addName = (): void => {
+      liff.sendMessages([
+        {
+          type: 'text',
+          text: name.value,
+        },
+      ]);
+      name.value = '';
+    };
+
     return {
-      formData: {
-        name: '',
-      },
-      lineId: null,
+      name,
+      addName,
     };
   },
-  mounted() {
-    liff
-      .init({
-        liffId: process.env.LIFF_ID,
-      })
-      .then(() => {
-        this.lineId = data.context.userId || null;
-      });
-  },
-  methods: {
-    onSubmit() {
-      liff
-        .sendMessages([
-          {
-            type: 'text',
-            text: `お名前：\n${this.formData.name}`,
-          },
-          {
-            type: 'text',
-            text: '送信が完了しました',
-          },
-        ])
-        .then(() => {
-          liff.closeWindow();
-        });
-    },
-    handleCancel() {
-      liff.closeWindow();
-    },
-  },
-};
+});
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  padding: 20px;
-  min-height: 100vh;
-}
-
-.line-id {
-  margin-bottom: 30px;
-}
-
-.form > * {
-  margin-bottom: 10px;
-}
-</style>

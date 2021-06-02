@@ -1,5 +1,9 @@
+require('dotenv').config();
+// .envに記載している値を記載
+const { LIFF_ID } = process.env;
+
 export default {
-  target: 'static',
+  mode: 'spa',
   head: {
     title: 'sample',
     htmlAttrs: {
@@ -33,10 +37,14 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
   ],
   generate: {
     // choose to suit your project
     interval: 2000,
+  },
+  env: {
+    LIFF_ID,
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
