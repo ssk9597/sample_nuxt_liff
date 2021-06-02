@@ -28,7 +28,7 @@ export default defineComponent({
     });
 
     const addName = (): void => {
-      window.liff
+      liff
         .sendMessages([
           {
             type: 'text',
@@ -36,11 +36,11 @@ export default defineComponent({
           },
         ])
         .then(() => {
-          window.liff.closeWindow();
+          liff.closeWindow();
         })
         .catch(() => {
-          window.alert('Error sending message');
-          window.liff.closeWindow();
+          alert('Error sending message');
+          liff.closeWindow();
         });
 
       name.value = '';
