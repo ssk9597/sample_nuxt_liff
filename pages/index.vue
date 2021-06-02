@@ -27,7 +27,7 @@ export default {
       return;
     }
 
-    liff.init(data => {
+    window.liff.init(data => {
       this.lineId = data.context.userId || null;
     });
   },
@@ -37,7 +37,7 @@ export default {
         return;
       }
 
-      liff
+      window.liff
         .sendMessages([
           {
             type: 'text',
@@ -49,7 +49,7 @@ export default {
           },
         ])
         .then(() => {
-          liff.closeWindow();
+          window.liff.closeWindow();
         })
         .catch(e => {
           window.alert('Error sending message: ' + e);
@@ -59,7 +59,7 @@ export default {
       if (!this.canUseLIFF()) {
         return;
       }
-      liff.closeWindow();
+      window.liff.closeWindow();
     },
     canUseLIFF() {
       return navigator.userAgent.indexOf('Line') !== -1 && window.liff;
