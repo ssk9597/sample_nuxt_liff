@@ -28,6 +28,8 @@ export default defineComponent({
     });
 
     const addName = (): void => {
+      const idToken = liff.getDecodedIDToken();
+      alert(idToken);
       window.liff
         .sendMessages([
           {
@@ -40,6 +42,7 @@ export default defineComponent({
         })
         .catch(() => {
           window.alert('Error sending message');
+          window.liff.closeWindow();
         });
 
       name.value = '';
