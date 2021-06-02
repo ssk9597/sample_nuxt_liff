@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import liff from '@line/liff';
+
 export default {
   data() {
     return {
@@ -22,21 +24,17 @@ export default {
     };
   },
   mounted() {
-    if (!this.canUseLIFF()) {
-      return;
-    }
-
-    window.liff.init(data => {
-      this.lineId = data.context.userId || null;
-    });
+    liff
+      .init({
+        liffId: process.env.LIFF_ID,
+      })
+      .then(() => {
+        this.lineId = data.context.userId || null;
+      });
   },
   methods: {
     onSubmit() {
-      if (!this.canUseLIFF()) {
-        return;
-      }
-
-      window.liff
+      liff
         .sendMessages([
           {
             type: 'text',
@@ -48,20 +46,11 @@ export default {
           },
         ])
         .then(() => {
-          window.liff.closeWindow();
-        })
-        .catch(e => {
-          window.alert('Error sending message: ' + e);
+          liff.closeWindow();
         });
     },
     handleCancel() {
-      if (!this.canUseLIFF()) {
-        return;
-      }
-      window.liff.closeWindow();
-    },
-    canUseLIFF() {
-      return navigator.userAgent.indexOf('Line') !== -1 && window.liff;
+      liff.closeWindow();
     },
   },
 };

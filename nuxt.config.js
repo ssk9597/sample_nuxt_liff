@@ -1,5 +1,5 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  target: 'static',
   head: {
     title: 'sample',
     htmlAttrs: {
@@ -11,7 +11,6 @@ export default {
       { hid: 'description', name: 'description', content: '' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: [{ src: 'https://static.line-scdn.net/liff/edge/2/sdk.js' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
