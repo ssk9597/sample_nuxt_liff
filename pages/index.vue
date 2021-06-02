@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api';
-import liff from '@line/liff';
 
 declare global {
   interface Window {
@@ -28,7 +27,7 @@ export default defineComponent({
     });
 
     const addName = (): void => {
-      liff
+      window.liff
         .sendMessages([
           {
             type: 'text',
@@ -36,11 +35,11 @@ export default defineComponent({
           },
         ])
         .then(() => {
-          liff.closeWindow();
+          window.liff.closeWindow();
         })
         .catch(() => {
-          alert('Error sending message');
-          liff.closeWindow();
+          window.alert('Error sending message');
+          window.liff.closeWindow();
         });
 
       name.value = '';
