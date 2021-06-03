@@ -21,18 +21,16 @@ export default defineComponent({
     const name = ref<string>('');
     const liffID = ref<string | undefined>(process.env.LIFF_ID);
 
-    onMounted(async () => {
+    onMounted(async ($config: any) => {
       await window.liff.init({
         // dotenv経由だと失敗
-        liffId: process.env.LIFF_ID,
+        liffId: $config.LIFF_ID,
         // 直打ちだと成功
         // liffId: '1656056842-2mQbxB5R',
       });
     });
 
     const addName = (): void => {
-      alert(process.env.LIFF_ID);
-      alert(liffID.value);
       window.liff
         .sendMessages([
           {
