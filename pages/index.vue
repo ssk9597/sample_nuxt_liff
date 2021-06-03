@@ -26,23 +26,36 @@ export default defineComponent({
       });
     });
 
-    const addName = (): void => {
-      window.liff
-        .sendMessages([
+    const addName = async (): Promise<void> => {
+      try {
+        await window.liff.sendMessages([
           {
             type: 'text',
             text: name.value,
           },
-        ])
-        .then(() => {
-          window.liff.closeWindow();
-        })
-        .catch((err: string) => {
-          window.alert(err);
-          window.liff.closeWindow();
-        });
+        ]);
+        await window.liff.closeWindow();
+      } catch (err: any) {
+        window.alert(err);
+        await window.liff.closeWindow();
+      }
 
-      name.value = '';
+      // window.liff
+      //   .sendMessages([
+      //     {
+      //       type: 'text',
+      //       text: name.value,
+      //     },
+      //   ])
+      //   .then(() => {
+      //     window.liff.closeWindow();
+      //   })
+      //   .catch((err: string) => {
+      //     window.alert(err);
+      //     window.liff.closeWindow();
+      //   });
+
+      // name.value = '';
     };
 
     return {
