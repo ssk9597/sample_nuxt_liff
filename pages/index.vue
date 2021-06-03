@@ -19,18 +19,19 @@ window.liff = window.liff || {};
 export default defineComponent({
   setup() {
     const name = ref<string>('');
-    const liffID = ref<string | undefined>(process.env.LIFF_ID);
 
-    onMounted(async ($config: any) => {
+    onMounted(async () => {
+      console.log(process.env.LIFF_ID);
       await window.liff.init({
         // dotenv経由だと失敗
-        liffId: $config.LIFF_ID,
+        liffId: process.env.LIFF_ID as string | undefined,
         // 直打ちだと成功
         // liffId: '1656056842-2mQbxB5R',
       });
     });
 
     const addName = (): void => {
+      alert(process.env.LIFF_ID);
       window.liff
         .sendMessages([
           {
