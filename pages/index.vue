@@ -23,15 +23,11 @@ export default defineComponent({
     onMounted(async () => {
       console.log(process.env.LIFF_ID);
       await window.liff.init({
-        // dotenv経由だと失敗
         liffId: process.env.LIFF_ID as string,
-        // 直打ちだと成功
-        // liffId: '1656056842-2mQbxB5R',
       });
     });
 
     const addName = (): void => {
-      alert(process.env.LIFF_ID);
       window.liff
         .sendMessages([
           {
