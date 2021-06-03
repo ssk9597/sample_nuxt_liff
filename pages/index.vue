@@ -24,9 +24,9 @@ export default defineComponent({
     onMounted(async () => {
       await window.liff.init({
         // dotenv経由だと失敗
-        liffId: process.env.LIFF_ID,
+        // liffId: process.env.LIFF_ID,
         // 直打ちだと成功
-        // liffId: '1656056842-2mQbxB5R',
+        liffId: '1656056842-2mQbxB5R',
       });
     });
 
