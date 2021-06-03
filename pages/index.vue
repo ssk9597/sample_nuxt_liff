@@ -8,49 +8,36 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api';
-import liff from '@line/liff';
 
-// declare global {
-//   interface Window {
-//     liff: any;
-//   }
-// }
-// window.liff = window.liff || {};
+declare global {
+  interface Window {
+    liff: any;
+  }
+}
+window.liff = window.liff || {};
 
 export default defineComponent({
   setup() {
     const name = ref<string>('');
 
     onMounted(async () => {
-      await liff.init({
+      await window.liff.init({
         liffId: process.env.LIFF_ID as string,
       });
-      // await window.liff.init({
-      //   liffId: process.env.LIFF_ID as string,
-      // });
     });
 
     const addName = async (): Promise<void> => {
       try {
-        await liff.sendMessages([
+        await window.liff.sendMessages([
           {
             type: 'text',
             text: name.value,
           },
         ]);
-        // await window.liff.sendMessages([
-        //   {
-        //     type: 'text',
-        //     text: name.value,
-        //   },
-        // ]);
-        await liff.closeWindow();
-        // await window.liff.closeWindow();
+        await window.liff.closeWindow();
       } catch (err: any) {
-        alert(err);
-        // window.alert(err);
-        await liff.closeWindow();
-        // await window.liff.closeWindow();
+        window.alert(err);
+        await window.liff.closeWindow();
       }
     };
 
