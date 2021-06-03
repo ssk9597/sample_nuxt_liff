@@ -21,7 +21,6 @@ export default defineComponent({
     const name = ref<string>('');
 
     onMounted(async () => {
-      console.log(process.env.LIFF_ID);
       await window.liff.init({
         liffId: process.env.LIFF_ID as string,
       });
