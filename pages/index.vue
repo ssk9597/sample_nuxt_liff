@@ -39,23 +39,6 @@ export default defineComponent({
         window.alert(err);
         await window.liff.closeWindow();
       }
-
-      // window.liff
-      //   .sendMessages([
-      //     {
-      //       type: 'text',
-      //       text: name.value,
-      //     },
-      //   ])
-      //   .then(() => {
-      //     window.liff.closeWindow();
-      //   })
-      //   .catch((err: string) => {
-      //     window.alert(err);
-      //     window.liff.closeWindow();
-      //   });
-
-      // name.value = '';
     };
 
     return {
